@@ -3,11 +3,13 @@ var userClickedPattern = [];
 var level = 0;
 var statment = 0;
 
+
 //when you start the game
 $(document).on("keydown", function myFunction(event) {
   if (event.key === "a") {
     nextSequence();
     $(document).off("keydown");
+    game();
   }
 });
 
@@ -34,16 +36,32 @@ $(".btn").click(function() {
     playSound("wrong");
     startOver();
   }
-
 });
+
+function game(){
+  $(document).on("keydown",function play(event){
+    switch(event.key){
+      case "7" : $(".green").click();
+      break;
+      case "9" : $(".red").click();
+      break;
+      case "1" : $(".yellow").click();
+      break;
+      case "3" : $(".blue").click();
+    }
+  });
+}
+
 function startOver(){
   gamePattern = [];
   userClickedPattern = [];
   level = 0;
   statment = 0;
-  $(document).on("keydown", function myFunction(event) {
+  $(document).off("keydown");
+  $(document).on("keydown", function myFunction() {
       nextSequence();
       $(document).off("keydown");
+      game();
   });
 }
 function checkAnswer(currentLevel) {
